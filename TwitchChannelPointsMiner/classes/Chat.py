@@ -10,9 +10,10 @@ logger = logging.getLogger(__name__)
 
 
 class ClientIRC(SingleServerIRCBot):
-    def __init__(self, username, token, channel):
+    def __init__(self, username, token, channel, chat_message):
         self.token = token
         self.channel = "#" + channel
+        self.chat_message = chat_message
         self.__active = False
 
         super(ClientIRC, self).__init__(
@@ -21,6 +22,11 @@ class ClientIRC(SingleServerIRCBot):
 
     def on_welcome(self, client, event):
         client.join(self.channel)
+        if self.chat_message:
+            self.connection.privmsg(target = self.channel, text = self.chat_message)
+            logger.info(
+                f"Sent Message \"{self.chat_message}\" to Chat: {self.channel[1:]}", extra={"emoji": ":speech_balloon:"}
+            )
 
     def start(self):
         self.__active = True
@@ -51,17 +57,18 @@ class ThreadChat(Thread):
     def __deepcopy__(self, memo):
         return None
 
-    def __init__(self, username, token, channel):
+    def __init__(self, username, token, channel, chat_message):
         super(ThreadChat, self).__init__()
 
         self.username = username
         self.token = token
         self.channel = channel
+        self.chat_message = chat_message
 
         self.chat_irc = None
 
     def run(self):
-        self.chat_irc = ClientIRC(self.username, self.token, self.channel)
+        self.chat_irc = ClientIRC(self.username, self.token, self.channel, self.chat_message)
         logger.info(
             f"Join IRC Chat: {self.channel}", extra={"emoji": ":speech_balloon:"}
         )

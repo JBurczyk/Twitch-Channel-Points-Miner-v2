@@ -23,6 +23,7 @@ class StreamerSettings(object):
         "watch_streak",
         "bet",
         "join_chat",
+        "chat_message"
     ]
 
     def __init__(
@@ -33,6 +34,7 @@ class StreamerSettings(object):
         watch_streak: bool = None,
         bet: BetSettings = None,
         join_chat: bool = True,
+        chat_message: str = "",
     ):
         self.make_predictions = make_predictions
         self.follow_raid = follow_raid
@@ -40,6 +42,7 @@ class StreamerSettings(object):
         self.watch_streak = watch_streak
         self.bet = bet
         self.join_chat = join_chat
+        self.chat_message = chat_message
 
     def default(self):
         for name in [
@@ -48,6 +51,7 @@ class StreamerSettings(object):
             "claim_drops",
             "watch_streak",
             "join_chat",
+            "chat_message",
         ]:
             if getattr(self, name) is None:
                 setattr(self, name, True)
@@ -248,6 +252,7 @@ class Streamer(object):
                 self.irc_chat.username,
                 self.irc_chat.token,
                 self.username,
+                self.settings.chat_message
             )
 
     def join_chat(self):
