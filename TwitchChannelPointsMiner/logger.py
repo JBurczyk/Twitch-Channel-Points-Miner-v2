@@ -108,10 +108,16 @@ class LoggerSettings:
     ):
         self.save = save
         self.less = less
+        if isinstance(console_level, str):
+            console_level = getattr(logging, console_level)
         self.console_level = console_level
+        if isinstance(file_level, str):
+            file_level = getattr(logging, file_level)
         self.file_level = file_level
         self.emoji = emoji
         self.colored = colored
+        if isinstance(color_palette, dict):
+            color_palette = ColorPalette(**color_palette)
         self.color_palette = color_palette
 
 

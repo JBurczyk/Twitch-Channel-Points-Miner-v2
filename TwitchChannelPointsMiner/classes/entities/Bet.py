@@ -59,6 +59,8 @@ class FilterCondition(object):
 
     def __init__(self, by=None, where=None, value=None, decision=None):
         self.by = by
+        if isinstance(where, str):
+            where = Condition[where]
         self.where = where
         self.value = value
 
@@ -91,14 +93,20 @@ class BetSettings(object):
         delay: float = None,
         delay_mode: DelayMode = None,
     ):
+        if isinstance(strategy, str):
+            strategy = Strategy[strategy]
         self.strategy = strategy
         self.percentage = percentage
         self.percentage_gap = percentage_gap
         self.max_points = max_points
         self.minimum_points = minimum_points
         self.stealth_mode = stealth_mode
+        if isinstance(filter_condition, dict):
+            filter_condition = FilterCondition(**filter_condition)
         self.filter_condition = filter_condition
         self.delay = delay
+        if isinstance(delay_mode, str):
+            delay_mode = DelayMode[delay_mode]
         self.delay_mode = delay_mode
 
     def default(self):

@@ -40,6 +40,8 @@ class StreamerSettings(object):
         self.follow_raid = follow_raid
         self.claim_drops = claim_drops
         self.watch_streak = watch_streak
+        if isinstance(bet, dict):
+            bet = BetSettings(**bet)
         self.bet = bet
         self.join_chat = join_chat
         self.chat_message = chat_message
@@ -59,7 +61,7 @@ class StreamerSettings(object):
             self.bet = BetSettings()
 
     def __repr__(self):
-        return f"BetSettings(make_predictions={self.make_predictions}, follow_raid={self.follow_raid}, claim_drops={self.claim_drops}, watch_streak={self.watch_streak}, bet={self.bet}, join_chat={self.join_chat})"
+        return f"StreamerSettings(make_predictions={self.make_predictions}, follow_raid={self.follow_raid}, claim_drops={self.claim_drops}, watch_streak={self.watch_streak}, bet={self.bet}, join_chat={self.join_chat}, chat_message={self.chat_message})"
 
 
 class Streamer(object):
