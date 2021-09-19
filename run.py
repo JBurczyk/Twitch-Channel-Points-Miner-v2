@@ -18,7 +18,8 @@ def dict_to_streamer(streamer) -> Streamer:
         return streamer
     if isinstance(streamer, dict):
         streamer_name = list(streamer.keys())[0]
-        return Streamer(streamer_name, settings=StreamerSettings(**streamer.get(streamer_name, None)))
+        settings = streamer.get(streamer_name) if streamer.get(streamer_name) is not None else {}
+        return Streamer(streamer_name, settings=StreamerSettings(**settings))
 
 
 if __name__ == "__main__":
