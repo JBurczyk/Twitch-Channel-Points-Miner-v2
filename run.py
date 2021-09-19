@@ -3,8 +3,7 @@
 import logging
 
 from colorama.ansi import Fore
-from TwitchChannelPointsMiner.logger import ColorPalette, LoggerSettings
-from TwitchChannelPointsMiner.classes.entities.Bet import BetSettings, Condition, DelayMode, FilterCondition, OutcomeKeys, Strategy
+from TwitchChannelPointsMiner.logger import LoggerSettings
 from TwitchChannelPointsMiner.classes.entities.Streamer import Streamer, StreamerSettings
 from TwitchChannelPointsMiner.classes.Settings import Priority
 from TwitchChannelPointsMiner import TwitchChannelPointsMiner
