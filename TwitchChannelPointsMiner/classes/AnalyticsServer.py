@@ -29,6 +29,7 @@ def read_json(streamer):
         mimetype="application/json",
     )
 
+
 def index(title="Dashboard", refresh=5):
     return render_template(
         "charts.html",
@@ -37,12 +38,17 @@ def index(title="Dashboard", refresh=5):
         streamers=",".join(streamers_available()),
     )
 
+
 def logs(username):
-    return Response(open("logs/" + username + ".log", "r").read(), mimetype="text/plain")
+    return Response(
+        open("logs/" + username + ".log", "r").read(), mimetype="text/plain"
+    )
 
 
 class AnalyticsServer(Thread):
-    def __init__(self, username, host: str = "127.0.0.1", port: int = 5000, refresh: int = 5):
+    def __init__(
+        self, username, host: str = "127.0.0.1", port: int = 5000, refresh: int = 5
+    ):
         super(AnalyticsServer, self).__init__()
 
         self.username = username
@@ -55,7 +61,9 @@ class AnalyticsServer(Thread):
             template_folder=os.path.join(Path().absolute(), "assets"),
             static_folder=os.path.join(Path().absolute(), "assets"),
         )
-        self.app.add_url_rule("/", "index", index, defaults={"title": username, "refresh": refresh})
+        self.app.add_url_rule(
+            "/", "index", index, defaults={"title": username, "refresh": refresh}
+        )
         self.app.add_url_rule("/json/<string:streamer>", "json", read_json)
         self.app.add_url_rule("/logs", "logs", logs, defaults={"username": username})
 

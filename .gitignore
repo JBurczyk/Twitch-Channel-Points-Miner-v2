@@ -140,6 +140,9 @@ cython_debug/
 # PyCharm
 .idea/
 
+# VS Code
+.vscode/*
+
 # Custom files
 **.yml
 !example.yml

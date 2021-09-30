@@ -113,7 +113,9 @@ class TwitchChannelPointsMiner:
             signal.signal(sign, self.end)
 
     def analytics(self, host: str = "127.0.0.1", port: int = 5000, refresh: int = 5):
-        http_server = AnalyticsServer(username=self.username, host=host, port=port, refresh=refresh)
+        http_server = AnalyticsServer(
+            username=self.username, host=host, port=port, refresh=refresh
+        )
         http_server.daemon = True
         http_server.name = "Analytics Thread"
         http_server.start()
@@ -185,7 +187,7 @@ class TwitchChannelPointsMiner:
                                 self.username,
                                 self.twitch.twitch_login.get_auth_token(),
                                 streamer.username,
-                                streamer.settings.chat_message
+                                streamer.settings.chat_message,
                             )
                         self.streamers.append(streamer)
                     except StreamerDoesNotExistException:

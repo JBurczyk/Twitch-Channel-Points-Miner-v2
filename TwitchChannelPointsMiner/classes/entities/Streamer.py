@@ -23,7 +23,7 @@ class StreamerSettings(object):
         "watch_streak",
         "bet",
         "join_chat",
-        "chat_message"
+        "chat_message",
     ]
 
     def __init__(
@@ -254,7 +254,7 @@ class Streamer(object):
                 self.irc_chat.username,
                 self.irc_chat.token,
                 self.username,
-                self.settings.chat_message
+                self.settings.chat_message,
             )
 
     def join_chat(self):

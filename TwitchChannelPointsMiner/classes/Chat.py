@@ -23,9 +23,10 @@ class ClientIRC(SingleServerIRCBot):
     def on_welcome(self, client, event):
         client.join(self.channel)
         if self.chat_message:
-            self.connection.privmsg(target = self.channel, text = self.chat_message)
+            self.connection.privmsg(target=self.channel, text=self.chat_message)
             logger.info(
-                f"Sent Message \"{self.chat_message}\" to Chat: {self.channel[1:]}", extra={"emoji": ":speech_balloon:"}
+                f'Sent Message "{self.chat_message}" to Chat: {self.channel[1:]}',
+                extra={"emoji": ":speech_balloon:"},
             )
 
     def start(self):
@@ -68,7 +69,9 @@ class ThreadChat(Thread):
         self.chat_irc = None
 
     def run(self):
-        self.chat_irc = ClientIRC(self.username, self.token, self.channel, self.chat_message)
+        self.chat_irc = ClientIRC(
+            self.username, self.token, self.channel, self.chat_message
+        )
         logger.info(
             f"Join IRC Chat: {self.channel}", extra={"emoji": ":speech_balloon:"}
         )
