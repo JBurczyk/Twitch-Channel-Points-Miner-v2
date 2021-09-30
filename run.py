@@ -1,7 +1,5 @@
 # -*- coding: utf-8 -*-
 
-import logging
-
 from colorama.ansi import Fore
 from TwitchChannelPointsMiner.logger import LoggerSettings
 from TwitchChannelPointsMiner.classes.entities.Streamer import (
