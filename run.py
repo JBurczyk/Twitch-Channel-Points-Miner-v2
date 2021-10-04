@@ -66,13 +66,7 @@ if __name__ == "__main__":
 
     if "dashboard" in config:
         dashboard = config.get("dashboard", {})
-        if dashboard is None:
-            dashboard = {}
-        twitch_miner.analytics(
-            host=dashboard.get("host", "127.0.0.1"),
-            port=dashboard.get("port", 5000),
-            refresh=dashboard.get("refresh", 5),
-        )
+        twitch_miner.analytics(**dashboard)
 
     twitch_miner.mine(
         streamers=list(map(dict_to_streamer, config.get("streamers"))),
